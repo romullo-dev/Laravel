@@ -11,4 +11,9 @@ class UserController extends Controller
         //carregar a VIEW 
         return view('users.index');
     }
+
+    public function create()
+    {
+        return view('form');
+    }
 }
