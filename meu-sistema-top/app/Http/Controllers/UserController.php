@@ -23,10 +23,15 @@ class UserController extends Controller
         } catch (Exception $e) {
             return back()->withInput()->with(
                 'error',
-                'Usuário não caaaaaaaaaaaaaaaaaadastrado!'
+                'Usuário não cadastrado!'
             );
         }
     }
-
+    
+    public function read ()
+    {
+        $usuarios = User::all();
+        return View('users',compact('usuarios'));
+    }
 
 }
