@@ -9,6 +9,6 @@ Route::get('/', function () {
 
 Route::get('/create-user', [UserController::class,'create'])->name('user.create');
 
-Route::post('store-user', [UserController::class,'store'])->name('user-store');
+Route::post('/store-user', [UserController::class,'store'])->name('user-store');
 
 Route::get('/read-user', [UserController::class, 'read' ])->name('user-read');
