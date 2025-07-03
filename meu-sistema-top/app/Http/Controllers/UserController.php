@@ -34,4 +34,27 @@ class UserController extends Controller
         return View('users',compact('usuarios'));
     }
 
+    public function delete ($id)
+    {
+        try {
+            $user = User::findOrFail($id);
+            $user->delete();
+            return redirect()->route('user-delete')->with('success','Usuario deletado com sucesso!');
+
+            
+        } catch (Exception $e) {
+            return back()->withInput()->with(
+                'error',
+                'Usuário não cadastrado!'
+            );
+        }   
+    }
+
+    public function edit ($id)
+    {
+        $user = User::findOrFail($id); //pega todos os dados dos usuarios
+        return view('edit',compact('usuario'));
+    } 
+
+
 }
