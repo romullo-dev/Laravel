@@ -52,7 +52,7 @@ class UserController extends Controller
 
     public function edit ($id)
     {
-        $usuario = User::findOrFail($id); //pega todos os dados dos usuarios
+        $usuario = User::findOrFail($id); 
         return view('edit',compact('usuario'));
     } 
 
