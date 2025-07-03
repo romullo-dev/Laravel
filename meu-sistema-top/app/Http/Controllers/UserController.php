@@ -52,9 +52,30 @@ class UserController extends Controller
 
     public function edit ($id)
     {
-        $user = User::findOrFail($id); //pega todos os dados dos usuarios
+        $usuario = User::findOrFail($id); //pega todos os dados dos usuarios
         return view('edit',compact('usuario'));
     } 
+
+    public function update(Request $request, $id)
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => "required|email|unique:users,email,{$id},id",
+    ]);
+
+    try {
+        $usuario = User::findOrFail($id);
+        $usuario->update($request->only(['name', 'email']));
+
+        return redirect()->route('user-read')->with('success', 'Usuário atualizado com sucesso!');
+    } catch (Exception $e) {
+        return back()->withInput()->with(
+            'error',
+            'Usuário não alterado!'
+        );
+    }
+}
+
 
 
 }

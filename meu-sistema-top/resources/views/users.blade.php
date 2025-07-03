@@ -9,6 +9,10 @@
 
 <body class="container mt-5">
 
+    @if(session('success'))
+    <div class="alert alert-success">{{ session('success') }}</div>
+@endif
+
     <h1 class="mb-4">Lista de Usuários</h1>
 
     @if ($usuarios->isEmpty())
@@ -37,7 +41,7 @@
                                 <i class="bi bi-pencil-fill"></i> Editar
                             </a>
 
-                            
+
                             <form action="{{ route('user-delete', $usuario->id) }}" method="post" style="display:inline">
                                 @csrf
                                 @method('DELETE')
