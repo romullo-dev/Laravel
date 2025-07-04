@@ -9,3 +9,5 @@ Route::get('/', function () {
 });
 
 Route::get('/user-create', [UsuarioController::class,'create'])->name('create-user');
+
+Route::post('/user-store', [UsuarioController::class,'store'])->name('create-store');
