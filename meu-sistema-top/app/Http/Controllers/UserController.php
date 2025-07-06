@@ -2,24 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Exception;
 
 class UserController extends Controller
 {
-    public function create (){
-        return view("create");
+    public function create()
+    {
+        return view('user.create');
     }
 
-    public function store (Request $request)
+    public function store(UserRequest $request)
     {
         try {
             User::create($request->all());
 
-            return redirect()->route('user.create')->with('sucess', 'Usuario cadastradi com sucesso!');
 
-            
+
+            return redirect()->route('user.create')->with('success', 'Usuario cadastrado com sucesso!');
         } catch (Exception $e) {
             return back()->withInput()->with(
                 'error',
@@ -27,55 +28,36 @@ class UserController extends Controller
             );
         }
     }
-    
-    public function read ()
+
+    public function read()
     {
-        $usuarios = User::all();
-        return View('users',compact('usuarios'));
+        $usuarios = User::orderByDesc('id')->paginate(5);
+        return View('user.users', ['usuarios' => $usuarios]);
     }
 
-    public function delete ($id)
+    public function delete($id)
     {
         try {
             $user = User::findOrFail($id);
             $user->delete();
-            return redirect()->route('user-delete')->with('success','Usuario deletado com sucesso!');
-
-            
+            return redirect()->route('user-delete')->with('success', 'Usuario deletado com sucesso!');
         } catch (Exception $e) {
             return back()->withInput()->with(
                 'error',
                 'Usuário não cadastrado!'
             );
-        }   
+        }
     }
 
-    public function edit ($id)
+      public function edit(User $user)
     {
-        $usuario = User::findOrFail($id); 
-        return view('edit',compact('usuario'));
-    } 
+        return view('user.edit', compact('user'));
+    }
 
-    public function update(Request $request, $id)
-{
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => "required|email|unique:users,email,{$id},id",
-    ]);
-
-    try {
-        $usuario = User::findOrFail($id);
-        $usuario->update($request->only(['name', 'email']));
+    public function update(UserRequest $request, User $user)
+    {
+        $user->update($request->only(['name', 'email']));
 
         return redirect()->route('user-read')->with('success', 'Usuário atualizado com sucesso!');
-    } catch (Exception $e) {
-        return back()->withInput()->with(
-            'error',
-            'Usuário não alterado!'
-        );
     }
-}
-
-
-
 }

@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <title>Lista de Usuários</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-
-<body class="container mt-5">
+@section('content')
 
     @if(session('success'))
     <div class="alert alert-success">{{ session('success') }}</div>
@@ -35,9 +28,12 @@
                         <td>{{ $usuario->name }}</td>
                         <td>{{ $usuario->email }}</td>
                         <td>
+                            <a href="#" class="btn btn-primary btn-sm">
+                                <i class="bi bi-eye"></i> Visualizar
+                            </a>
      
 
-                            <a href="{{ route('user.edit', $usuario->id) }}" class="btn btn-primary btn-sm">
+                            <a href="{{ route('user.edit',['user' => $usuario->id] ) }}" class="btn btn-primary btn-sm">
                                 <i class="bi bi-pencil-fill"></i> Editar
                             </a>
 
@@ -58,8 +54,12 @@
         </table>
     @endif
 
+    <div class="d-flex justify-content-center">
+    {{ $usuarios->links('pagination::bootstrap-5') }}
+</div>
+
+
+
     <a href="{{ route('user.create') }}" class="btn btn-success">Cadastrar Novo Usuário</a>
 
-</body>
-
-</html>
+@endsection
