@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Usuario;
+use FFI\Exception;
 use Illuminate\Http\Request;
 
 class UsuarioController extends Controller
@@ -25,7 +27,13 @@ class UsuarioController extends Controller
 
     public function store(Request $request)
     {
-        dd ($request->all());
+        try {
+            Usuario::create($request->all());
+            
+        } catch (Exception $e) {
+            
+        }
+        
     }
 
     /**
