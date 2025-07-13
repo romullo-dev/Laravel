@@ -63,21 +63,45 @@ class UsuarioController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
+   public function update(Request $request, Usuario $usuario)
+{
+    $request->validate([
+        'nome' => 'required|string|max:100',
+        'email' => 'required|email|max:45',
+        'status_funcionario' => 'required|in:Ativo,Inativo',
+        'tipo_usuario' => 'required|in:admin,operador,motorista',
+        'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+    ]);
+
+    try {
+        $data = $request->only(['nome', 'email', 'status_funcionario', 'tipo_usuario']);
+
+        if ($request->hasFile('foto')) {
+            $foto = $request->file('foto');
+            $nomeFoto = time() . '_' . $foto->getClientOriginalName();
+            $foto->move(public_path('fotos'), $nomeFoto);
+            $data['foto'] = $nomeFoto;
+        }
+
+        $usuario->update($data);
+
+        return redirect()->route('read-user')->with('success', 'Usuário atualizado com sucesso!');
+    } catch (\Exception $e) {
+        return redirect()->route('read-user')->with('error', 'Erro ao atualizar o usuário: ' . $e->getMessage());
     }
+}
+
+
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy( $id_usuario) 
+    public function destroy($id_usuario)
     {
         try {
             $usuario = Usuario::findOrFail($id_usuario);
             $usuario->delete();
-            return Redirect()->route('read-user')->with('success','Usuário deletado com sucesso!' );
-           
+            return Redirect()->route('read-user')->with('success', 'Usuário deletado com sucesso!');
         } catch (Exception $e) {
             return back()->withInput()->with(
                 'error',

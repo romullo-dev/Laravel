@@ -1,6 +1,27 @@
 @extends('layouts.app')
 
 @section('content')
+
+@if(session('success'))
+        
+        <div
+            class="alert alert-success"
+            role="alert"
+        >
+          {{ session('success') }}
+
+        </div>
+@endif
+
+ @if(session('error'))
+        
+        <div
+            class="alert alert-danger"
+            role="alert">
+          {{ session('error') }}
+        </div>
+@endif
+
     <div class="container-fluid py-4">
 
         <div class="d-flex justify-content-between align-items-center mb-3">
@@ -80,7 +101,12 @@
                                     data-bs-target="#modalShow{{ $usuario->id_usuario }}">
                                     <i class="bi bi-eye-fill"></i>
                                 </button>
-                                <button class="btn btn-sm btn-primary me-1"><i class="bi bi-pencil-square"></i></button>
+
+
+                                <button class="btn btn-sm btn-primary me-1" data-bs-toggle="modal"
+                                    data-bs-target="#modalEdit{{ $usuario->id_usuario }}">
+                                    <i class="bi bi-pencil-square"></i>
+                                </button>
 
                                 <form action="{{ route('destroy-user', $usuario->id_usuario) }}" method="post"
                                     style="display:inline">
@@ -91,8 +117,6 @@
                                         onclick="return confirm('Tem certeza que quer apagar o usuário {{ $usuario->nome }}?')">
                                         <i class="bi bi-trash"></i>
                                     </button>
-
-
                                 </form>
                             </td>
                         </tr>
@@ -108,9 +132,15 @@
         </div>
     </div>
 
-    
+
 
     <!-- Modal Novo Usuário -->
     @include('User.modais.novo')
     @include('User.modais.show')
+
+    <!-- Inclui todos os modais show e edit -->
+    @foreach ($usuarios as $usuario)
+        @include('User.modais.edit', ['usuario' => $usuario])
+    @endforeach
+
 @endsection

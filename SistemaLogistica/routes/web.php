@@ -24,6 +24,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::delete('/user-destroy/{user}', [UsuarioController::class, 'destroy'])->name('destroy-user');
 
+    Route::put('user-update/{usuario}',[UsuarioController::class, 'update'])->name('update-user');
+
     
 
 
