@@ -42,6 +42,6 @@ class Usuario extends Authenticatable
 
     public function motorista()
     {
-        return $this->hasMany(Motoristum::class, 'id_Usuario');
+        return $this->hasMany(Motorista::class, 'id_Usuario');
     }
 }

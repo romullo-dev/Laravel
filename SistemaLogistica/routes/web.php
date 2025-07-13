@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MotoristaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuarioController;
 
@@ -26,7 +27,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::put('user-update/{usuario}',[UsuarioController::class, 'update'])->name('update-user');
 
-    
-
-
+    Route::prefix('motorista')->name('motorista.')->group(function (){
+        Route::get('/', [MotoristaController::class, 'index'] )->name('index');
+        Route::post('/store',[MotoristaController::class, 'store'])->name('store');
+    });
 });

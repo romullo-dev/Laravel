@@ -46,23 +46,6 @@ class UsuarioController extends Controller
         return view('User.user', compact('usuarios'));
     }
 
-
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
    public function update(Request $request, Usuario $usuario)
 {
     $request->validate([
@@ -92,10 +75,6 @@ class UsuarioController extends Controller
 }
 
 
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy($id_usuario)
     {
         try {

@@ -76,7 +76,7 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
                                 <li><a class="dropdown-item" href="?veiculo"><i class="bi bi-truck"></i> Veículo</a></li>
-                                <li><a class="dropdown-item" href="?Motorista"><i class="bi bi-person-badge"></i> Motorista</a></li>
+                                <li><a class="dropdown-item" href="{{ route('motorista.index') }}"><i class="bi bi-person-badge"></i> Motorista</a></li>
                                 <li><a class="dropdown-item" href="{{ route('read-user') }}"><i class="bi bi-people"></i> Usuários</a></li>
                             </ul>
                         </li>

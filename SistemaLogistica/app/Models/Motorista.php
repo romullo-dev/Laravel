@@ -24,10 +24,10 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App\Models
  */
-class Motoristum extends Model
+class Motorista extends Model
 {
 	protected $table = 'motorista';
-	public $timestamps = false;
+	public $timestamps = true;
 
 	protected $casts = [
 		'validade_cnh' => 'datetime',
@@ -37,7 +37,8 @@ class Motoristum extends Model
 	protected $fillable = [
 		'cnh',
 		'categoria',
-		'validade_cnh'
+		'validade_cnh',
+		'id_Usuario'
 	];
 
 	public function usuario()
