@@ -2,43 +2,51 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UsuarioRequest;
 use App\Models\Usuario;
+use Doctrine\DBAL\Schema\View;
 use FFI\Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 
 class UsuarioController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return view("User.user");
-    }
-
-
-    public function store(Request $request)
+    public function store(UsuarioRequest $request)
     {
         try {
-            Usuario::create($request->all());
-            
-        } catch (Exception $e) {
-            
+            $data = $request->only([
+                'nome',
+                'user',
+                'tipo_usuario',
+                'cpf',
+                'status_funcionario',
+                'email'
+            ]);
+
+            $data['password'] = Hash::make($request->password);
+
+            if ($request->hasFile('foto')) {
+                $data['foto'] = $request->file('foto')->store('usuarios', 'public');
+            }
+
+            Usuario::create($data);
+
+            return redirect()->back()->with('success', 'Usuário cadastrado com sucesso!');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Erro ao cadastrar usuário.');
         }
-        
     }
 
-    /**
-     * Display the specified resource.
-     */
+    public function read()
+    {
+        $usuarios = Usuario::orderBy('created_at', 'desc')->paginate(7);
+
+        return view('User.user', compact('usuarios'));
+    }
+
+
     public function show(string $id)
     {
         //
@@ -63,8 +71,18 @@ class UsuarioController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy( $id_usuario) 
     {
-        //
+        try {
+            $usuario = Usuario::findOrFail($id_usuario);
+            $usuario->delete();
+            return Redirect()->route('read-user')->with('success','Usuário deletado com sucesso!' );
+           
+        } catch (Exception $e) {
+            return back()->withInput()->with(
+                'error',
+                'Usuário não deletado'
+            );
+        }
     }
 }

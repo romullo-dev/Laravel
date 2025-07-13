@@ -12,11 +12,12 @@ class Usuario extends Authenticatable
 
     protected $table = 'usuario';
     protected $primaryKey = 'id_usuario';
-    public $timestamps = true; 
+    public $timestamps = true;
+
     protected $fillable = [
-        'nome_usuario',
+        'nome',
         'user',
-        'senha',
+        'password',
         'tipo_usuario',
         'cpf',
         'status_funcionario',
@@ -25,16 +26,18 @@ class Usuario extends Authenticatable
     ];
 
     protected $hidden = [
-        'senha',
+        'password',
     ];
 
-    protected function casts(): array
+    protected $casts = [
+        'password' => 'hashed',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+    ];
+
+    public function getAuthPassword()
     {
-        return [
-            'senha' => 'hashed',
-            'created_at' => 'datetime',
-            'updated_at' => 'datetime',
-        ];
+        return $this->password;
     }
 
     public function motorista()

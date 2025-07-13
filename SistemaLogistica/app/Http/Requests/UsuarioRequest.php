@@ -22,15 +22,14 @@ class UsuarioRequest extends FormRequest
     public function rules(): array
     {
         return [
-
-            'nome_usuario' => 'required',
-            'user'=>'required|min:6|unique:usuario',
-            'senha' => 'required|password|min:6',
-            'tipo_usuario'  => 'required',
-            'cpf'=> 'required|min:11|unique:usuario',
-            'status_funcionario' => 'required',
-            'email' => 'required|email|unique:usuario',
-            'foto',
+            'nome' => 'required|string|max:100',
+            'user' => 'required|min:4|max:50|unique:usuario,user',
+            'password' => 'required|string|min:6',
+            'tipo_usuario' => 'required|in:admin,operador,motorista',
+            'cpf' => 'required|min:11|max:14|unique:usuario,cpf',
+            'status_funcionario' => 'required|in:ativo,inativo',
+            'email' => 'required|email|unique:usuario,email',
+            'foto' => 'nullable|image|max:2048' 
         ];
     }
 }

@@ -3,21 +3,28 @@
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuarioController;
-use Faker\Guesser\Name;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
-Route::get('/user-create', [UsuarioController::class,'create'])->name('create-user');
+Route::get('/login', [AuthController::class, 'index'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 
-Route::post('/user-store', [UsuarioController::class,'store'])->name('create-store');
+Route::middleware(['auth'])->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/Login', [AuthController::class, 'index'])->name('login');
+    Route::get('/dashboard', function () {
+        return view('home.dashboard');
+    })->name('dashboard');
 
-Route::post('/Login', [AuthController::class, 'LoginAuth'])->name('auth');
+    Route::get('/user-read', [UsuarioController::class, 'read'])->name('read-user');
 
-Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
+    Route::post('/user-store', [UsuarioController::class, 'store'])->name('store-user');
+
+    Route::delete('/user-destroy/{user}', [UsuarioController::class, 'destroy'])->name('destroy-user');
+
+    
 
 
-
+});
