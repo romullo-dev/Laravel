@@ -12,13 +12,12 @@
                     <label for="usuario">Usuário</label>
                     <select name="id_Usuario" class="form-select" required>
                         <option value="">Selecione um usuário</option>
-                        @foreach ($usuarios as $usuario)
-                            @if ($usuario->tipo_usuario === 'motorista')
-                                <option value="{{ $usuario->id_usuario }}">{{ $usuario->nome }}</option>
-                            @endif
+                        @foreach ($usuariosSelect as $usuario)
+                            <option value="{{ $usuario->id_usuario }}">{{ $usuario->nome }}</option>
                         @endforeach
                     </select>
                 </div>
+
 
                 <div class="col-md-6">
                     <label for="cnh">CNH</label>
