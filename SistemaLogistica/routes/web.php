@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ModeloController;
 use App\Http\Controllers\MotoristaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuarioController;
@@ -30,5 +31,9 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('motorista')->name('motorista.')->group(function (){
         Route::get('/', [MotoristaController::class, 'index'] )->name('index');
         Route::post('/store',[MotoristaController::class, 'store'])->name('store');
+    });
+    Route::prefix('modelo')->name('modelo.')->group(function (){
+        Route::get('/', [ModeloController::class, 'index'] )->name('index');
+        Route::post('/store',[ModeloController::class, 'store'])->name('store');    
     });
 });

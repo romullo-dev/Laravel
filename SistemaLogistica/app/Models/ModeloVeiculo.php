@@ -26,10 +26,13 @@ class ModeloVeiculo extends Model
 	protected $primaryKey = 'id_modelo_veiculo';
 	public $timestamps = false;
 
-	protected $fillable = [
-		'marca',
-		'modelo'
-	];
+	 protected $fillable = [
+        'marca',
+        'modelo',
+        'categoria',    
+        'descricao',
+        'status'
+    ];
 
 	public function veiculos()
 	{

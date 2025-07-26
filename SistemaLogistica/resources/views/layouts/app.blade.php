@@ -64,20 +64,32 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
                                 <li><a class="dropdown-item" href="?rotas"><i class="bi bi-signpost"></i> Rotas</a></li>
-                                <li><a class="dropdown-item" href="?rotasAjuste"><i class="bi bi-map-fill"></i> Ajuste de Rotas</a></li>
+                                <li><a class="dropdown-item" href="?rotasAjuste"><i class="bi bi-map-fill"></i> Ajuste
+                                        de Rotas</a></li>
                                 <li><a class="dropdown-item" href="?pedidos"><i class="bi bi-box"></i> Pedidos</a></li>
                             </ul>
                         </li>
 
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-white" href="#" id="cadastrosDropdown"
-                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle text-white" href="#" id="cadastrosDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="bi bi-person-plus-fill me-1"></i> Cadastros
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
-                                <li><a class="dropdown-item" href="?veiculo"><i class="bi bi-truck"></i> Veículo</a></li>
-                                <li><a class="dropdown-item" href="{{ route('motorista.index') }}"><i class="bi bi-person-badge"></i> Motorista</a></li>
-                                <li><a class="dropdown-item" href="{{ route('read-user') }}"><i class="bi bi-people"></i> Usuários</a></li>
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-center gap-2" href="?veiculo">
+                                        <i class="bi bi-truck fs-5 text-primary"></i> Veículo
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-center gap-2" href="{{ route('modelo.index') }}">
+                                        <i class="bi bi-gear fs-5 text-success"></i> Modelo do Veículo
+                                    </a>
+                                    <li class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="{{ route('motorista.index') }}"><i
+                                            class="bi bi-person-badge"></i> Motorista</a></li>
+                                <li><a class="dropdown-item" href="{{ route('read-user') }}"><i
+                                            class="bi bi-people"></i> Usuários</a></li>
                             </ul>
                         </li>
 
