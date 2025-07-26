@@ -3,18 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\ModeloVeiculo;
-use Doctrine\DBAL\Schema\View;
 use Illuminate\Http\Request;
 
-class ModeloController extends Controller
+class VeiculoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        View ('veiculo.modelo.indec');
-    }   
+        //
+    }
 
     /**
      * Show the form for creating a new resource.

@@ -2,5 +2,7 @@
 
 @section('content')
 
+
+
     <div>aaaaaaaaaaaaaaaaaaaa</div>
 @endsection

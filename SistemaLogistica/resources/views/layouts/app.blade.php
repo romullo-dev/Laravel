@@ -77,7 +77,7 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
                                 <li>
-                                    <a class="dropdown-item d-flex align-items-center gap-2" href="?veiculo">
+                                    <a class="dropdown-item d-flex align-items-center gap-2" href="{{ route('veiculo.index') }}">
                                         <i class="bi bi-truck fs-5 text-primary"></i> Veículo
                                     </a>
                                 </li>
