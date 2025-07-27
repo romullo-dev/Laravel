@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\VeiculoRequest;
 use App\Models\ModeloVeiculo;
+use App\Models\Veiculo;
 use Illuminate\Http\Request;
 
 class VeiculoController extends Controller
@@ -13,7 +15,7 @@ class VeiculoController extends Controller
     public function index()
     {
 
-        return view ('veiculo.veiculo.index');
+        return view('veiculo.veiculo.index');
     }
 
     /**
@@ -27,9 +29,16 @@ class VeiculoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(VeiculoRequest $request)
     {
-        //
+        
+        try {
+            $data = $request->validated();
+            Veiculo::create($data);
+            return redirect()->back()->with('success', 'Veículo cadastrado com sucesso!');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Erro ao cadastrar veículo.'.$e);
+        }
     }
 
     /**

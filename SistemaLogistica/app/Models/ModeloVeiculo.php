@@ -22,20 +22,21 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ModeloVeiculo extends Model
 {
-	protected $table = 'modelo_veiculo';
-	protected $primaryKey = 'id_modelo_veiculo';
-	public $timestamps = false;
+    protected $table = 'modelo_veiculo';
+    protected $primaryKey = 'id_modelo_veiculo';
+    public $timestamps = false;
 
-	 protected $fillable = [
+    protected $fillable = [
         'marca',
         'modelo',
-        'categoria',    
+        'categoria',
         'descricao',
-        'status'
+        'status',
     ];
 
-	public function veiculos()
-	{
-		return $this->hasMany(Veiculo::class, 'modelo_Veiculo');
-	}
+    public function veiculos()
+    {
+        return $this->hasMany(Veiculo::class, 'id_modelo_veiculo');
+    }
 }
+
