@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ModeloVeiculoRequest;
 use App\Models\ModeloVeiculo;
 use Doctrine\DBAL\Schema\View;
+use Exception;
 use Illuminate\Http\Request;
 
 class ModeloController extends Controller
@@ -13,23 +15,27 @@ class ModeloController extends Controller
      */
     public function index()
     {
-        View ('veiculo.modelo.indec');
-    }   
+        //View ('veiculo.veiculo.index');
+        return view('veiculo.modelo.index');
+    }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
-    }
+    public function create() {}
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ModeloVeiculoRequest $request)
     {
-        //
+        try {
+            $data = $request->validated();
+            ModeloVeiculo::create($data);
+            return redirect()->back()->with('success', 'Modelo cadastrado com sucesso!');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'Erro ao cadastrar modelo de veiculo.'.$e);
+        }
     }
 
     /**

@@ -16,6 +16,7 @@ class UsuarioController extends Controller
     public function store(UsuarioRequest $request)
     {
         try {
+            
             $data = $request->only([
                 'nome',
                 'user',

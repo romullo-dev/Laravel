@@ -21,6 +21,7 @@ Route::middleware(['auth'])->group(function () {
         return view('home.dashboard');
     })->name('dashboard');
 
+    
     Route::get('/user-read', [UsuarioController::class, 'read'])->name('read-user');
 
     Route::post('/user-store', [UsuarioController::class, 'store'])->name('store-user');
