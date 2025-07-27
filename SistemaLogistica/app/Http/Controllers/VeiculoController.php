@@ -14,8 +14,13 @@ class VeiculoController extends Controller
      */
     public function index()
     {
+        $modelos = Veiculo::with('modelo_veiculo')
+            ->paginate(perPage: 10);
+        $modeloSelect = Veiculo::with('modelo_veiculo')->get();
 
-        return view('veiculo.veiculo.index');
+        //dd($modelos);
+
+        return view('veiculo.veiculo.index', compact('modelos', 'modeloSelect'));
     }
 
     /**
@@ -31,13 +36,13 @@ class VeiculoController extends Controller
      */
     public function store(VeiculoRequest $request)
     {
-        
+
         try {
             $data = $request->validated();
             Veiculo::create($data);
             return redirect()->back()->with('success', 'Veículo cadastrado com sucesso!');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Erro ao cadastrar veículo.'.$e);
+            return redirect()->back()->with('error', 'Erro ao cadastrar veículo.' . $e);
         }
     }
 

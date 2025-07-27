@@ -57,7 +57,7 @@
             <table class="table table-hover align-middle table-bordered bg-white">
                 <thead class="table-light">
                     <tr>
-                        <th>Data Criação</th>
+                        <th>Data de Criação</th>
                         <th>Nome</th>
                         <th>CNH</th>
                         <th>Categoria</th>

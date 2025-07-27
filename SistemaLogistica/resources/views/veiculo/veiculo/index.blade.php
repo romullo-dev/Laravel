@@ -28,7 +28,8 @@
         {{-- Filtros --}}
         <form method="GET" class="row g-2 mb-3">
             <div class="col-md-4">
-                <input type="text" name="busca" class="form-control" placeholder="Buscar por nome ou CPF" value="{{ request('busca') }}">
+                <input type="text" name="busca" class="form-control" placeholder="Buscar por nome ou CPF"
+                    value="{{ request('busca') }}">
             </div>
             <div class="col-md-3">
                 <select name="tipo" class="form-select">
@@ -57,25 +58,58 @@
             <table class="table table-hover align-middle table-bordered bg-white">
                 <thead class="table-light">
                     <tr>
-                        <th>Data Criação</th>
-                        <th>Nome</th>
-                        <th>CNH</th>
+                        <th>Data de Criação</th>
+                        <th>Placa</th>
+                        <th>Ano</th>
                         <th>Categoria</th>
-                        <th>Validade</th>
+                        <th>Capacidade</th>
                         <th class="text-center">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
-                   
+                    @foreach ($modelos as $veiculo)
+                        @if ($veiculo->modelo_veiculo)
+                        <tr>
+                            <td>{{ $veiculo->created_at?->format('d/m/Y H:i') ?? '-'  }}</td>
+                            <td>{{ $veiculo->placa }}</td>
+                            <td>{{ $veiculo->ano  }}</td>
+                            <td>{{ $veiculo->modelo_veiculo->categoria }}</td>
+                            <td>{{ $veiculo->capacidade_kg. ' Kg'  }}</td>
+                            <td class="text-center">
+                                    <button class="btn btn-sm btn-warning me-1" data-bs-toggle="modal" data-bs-target="#modalShow{{ $veiculo->id_Veiculo }}">
+                                        <i class="bi bi-eye-fill"></i>
+                                    </button>
+
+                                    <button class="btn btn-sm btn-primary me-1" data-bs-toggle="modal" data-bs-target="#modalEdit{{ $veiculo->id_Veiculo}}">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </button>
+
+                                    <form action="#" method="post" style="display:inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Tem certeza que quer apagar o usuário {{ $veiculo->placa }}?')">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                                </tr>
+                        @else
+                        
+
+                        @endif
+
+
+                    @endforeach
+
                 </tbody>
             </table>
         </div>
         <br>
 
-        {{-- <div class="d-flex justify-content-center">
-            {{ /*$usuarios->links('pagination::bootstrap-5')*/ }}
+         <div class="d-flex justify-content-center">
+            {{ $modelos->links('pagination::bootstrap-5') }}
 
-        </div> --}}
+        </div> 
 
         @include('veiculo.veiculo.modais.novo')
 

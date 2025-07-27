@@ -11,16 +11,16 @@ use Illuminate\Http\Request;
 class MotoristaController extends Controller
 {
     public function index()
-{
-    $usuarios = Usuario::with('motorista')
-        ->where('tipo_usuario', 'motorista')
-        ->paginate(10); 
+    {
+        $usuarios = Usuario::with('motorista')
+            ->where('tipo_usuario', 'motorista')
+            ->paginate(10);
 
-    $usuariosSelect = Usuario::where('tipo_usuario', 'motorista')->doesntHave('motorista')->get();
+        $usuariosSelect = Usuario::where('tipo_usuario', 'motorista')->doesntHave('motorista')->get();
 
 
-    return view('motorista.index', compact('usuarios', 'usuariosSelect'));
-}
+        return view('motorista.index', compact('usuarios', 'usuariosSelect'));
+    }
 
 
     public function store(MotoristaRequest $request)
@@ -33,10 +33,11 @@ class MotoristaController extends Controller
         }
     }
 
-    public function road ()
-    {
+    public function road() {}
 
-    }
+
+
+    
 
     public function show(string $id)
     {
