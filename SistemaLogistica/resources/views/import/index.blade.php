@@ -67,7 +67,7 @@
                 <br><br>
 
                 <label for="arquivo">Importe o PDF da nota fiscal</label>
-                <input type="file" name="arquivo" id="arquivo" accept=".pdf" required>
+                <input type="file" name="pdf" id="pdf" accept=".pdf" required>
 
                 <br><br>
 
