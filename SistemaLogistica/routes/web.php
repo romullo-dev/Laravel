@@ -50,7 +50,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/store',[VeiculoController::class, 'store'])->name('store');    
     });
 
-    Route::prefix('importe')->name('importe.')->group(function() {
+    Route::prefix('importacao')->name('importacao.')->group(function() {
         Route::get('/' ,[ImportacaoController::class,'index'])->name('index');
         Route::post('/store',  [ImportacaoController::class,'store'])->name('store');
     });
