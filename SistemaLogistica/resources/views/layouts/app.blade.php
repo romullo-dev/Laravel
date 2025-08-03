@@ -94,7 +94,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="?cotacao">
+                            <a class="nav-link text-white" href="{{ route('importe.index') }}">
                                 <i class="bi bi-calculator me-1"></i> Cotação
                             </a>
                         </li>

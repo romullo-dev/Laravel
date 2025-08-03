@@ -1,42 +1,34 @@
 <?php
 
-/**
- * Created by Reliese Model.
- */
-
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * Class Endereco
- * 
- * @property int $id_endereco
- * @property string $cep
- * @property string $endereco
- * @property string $casa
- * @property string $observacao
- * 
- * @property Collection|Pedido[] $pedidos
- *
- * @package App\Models
- */
 class Endereco extends Model
 {
-	protected $table = 'endereco';
-	protected $primaryKey = 'id_endereco';
-	public $timestamps = false;
+    use HasFactory;
 
-	protected $fillable = [
-		'cep',
-		'endereco',
-		'casa',
-		'observacao'
-	];
+    protected $table = 'enderecos';
+    protected $primaryKey = 'id_endereco';
 
-	public function pedidos()
-	{
-		return $this->hasMany(Pedido::class, 'destinatario_id_endereco');
-	}
+    protected $fillable = [
+        'cep',
+        'endereco',
+        'casa',
+        'observacao'
+    ];
+
+    public $timestamps = false;
+
+    public function notasRemetente()
+    {
+        return $this->hasMany(NotaFiscal::class, 'endereco_remetente');
+    }
+
+    public function notasDestinatario()
+    {
+        return $this->hasMany(NotaFiscal::class, 'endereco_destinatario');
+    }
 }
+

@@ -1,40 +1,33 @@
 <?php
 
-/**
- * Created by Reliese Model.
- */
-
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * Class Cliente
- * 
- * @property int $id_cliente
- * @property string $nome
- * @property string $documento
- * @property string|null $tipo
- * 
- * @property Collection|Pedido[] $pedidos
- *
- * @package App\Models
- */
 class Cliente extends Model
 {
-	protected $table = 'cliente';
-	protected $primaryKey = 'id_cliente';
-	public $timestamps = false;
+    use HasFactory;
 
-	protected $fillable = [
-		'nome',
-		'documento',
-		'tipo'
-	];
+    protected $table = 'clientes';
+    protected $primaryKey = 'id_cliente';
 
-	public function pedidos()
-	{
-		return $this->hasMany(Pedido::class, 'id_destinatario');
-	}
+    protected $fillable = [
+        'nome',
+        'documento',
+        'tipo'
+    ];
+
+    public $timestamps = false;
+
+    public function notasEmitidas()
+    {
+        return $this->hasMany(NotaFiscal::class, 'cliente_remetente');
+    }
+
+    public function notasRecebidas()
+    {
+        return $this->hasMany(NotaFiscal::class, 'cliente_destinatario');
+    }
 }
+

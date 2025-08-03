@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ImportacaoController;
 use App\Http\Controllers\ModeloController;
 use App\Http\Controllers\MotoristaController;
 use Illuminate\Support\Facades\Route;
@@ -20,6 +21,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
         return view('home.dashboard');
     })->name('dashboard');
+
+    /*Route::prefix('user')->name('user.')->group(function() {
+        
+    });*/
 
     
     Route::get('/user-read', [UsuarioController::class, 'read'])->name('read-user');
@@ -43,5 +48,10 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('veiculo')->name('veiculo.')->group(function (){
         Route::get('/', [VeiculoController::class, 'index'] )->name('index');
         Route::post('/store',[VeiculoController::class, 'store'])->name('store');    
+    });
+
+    Route::prefix('importe')->name('importe.')->group(function() {
+        Route::get('/' ,[ImportacaoController::class,'index'])->name('index');
+        Route::post('/store',  [ImportacaoController::class,'store'])->name('store');
     });
 });
