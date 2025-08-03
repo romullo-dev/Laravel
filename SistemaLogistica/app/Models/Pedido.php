@@ -9,7 +9,7 @@ class Pedido extends Model
 {
     use HasFactory;
 
-    protected $table = 'pedidos';
+    protected $table = 'pedido';
     protected $primaryKey = 'id_pedido';
 
     protected $fillable = [
@@ -25,5 +25,10 @@ class Pedido extends Model
     {
         return $this->belongsTo(NotaFiscal::class, 'id_notaFiscal');
     }
+
+   public function frete()
+{
+    return $this->hasOne(Frete::class, 'id_pedido', 'id_pedido');
 }
 
+}

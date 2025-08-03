@@ -9,7 +9,7 @@ class NotaFiscal extends Model
 {
     use HasFactory;
 
-    protected $table = 'nota_fiscais';
+    protected $table = 'notafiscal';
     protected $primaryKey = 'id_notaFiscal';
 
     protected $fillable = [
@@ -20,12 +20,12 @@ class NotaFiscal extends Model
         'valor_total',
         'peso',
         'quantidade_volumes',
-        'pdf',
+        //'pdf',
         'cliente_remetente',
         'cliente_destinatario',
         'endereco_remetente',
         'endereco_destinatario',
-        'id_produto'
+        //'id_produto'
     ];
 
     public $timestamps = false;
@@ -55,9 +55,8 @@ class NotaFiscal extends Model
         return $this->belongsTo(Produto::class, 'id_produto');
     }
 
-    public function pedidos()
+    public function pedido()
     {
-        return $this->hasMany(Pedido::class, 'id_notaFiscal');
+        return $this->hasOne(Pedido::class, 'id_notaFiscal', 'id_notaFiscal');
     }
 }
-

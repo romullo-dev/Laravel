@@ -66,7 +66,7 @@
                                 <li><a class="dropdown-item" href="?rotas"><i class="bi bi-signpost"></i> Rotas</a></li>
                                 <li><a class="dropdown-item" href="?rotasAjuste"><i class="bi bi-map-fill"></i> Ajuste
                                         de Rotas</a></li>
-                                <li><a class="dropdown-item" href="?pedidos"><i class="bi bi-box"></i> Pedidos</a></li>
+                                <li><a class="dropdown-item" href="{{ route('pedidos.index') }}"><i class="bi bi-box"></i> Pedidos</a></li>
                             </ul>
                         </li>
 
