@@ -46,26 +46,35 @@ class ImportacaoController extends Controller
             $enderecoEmitente = Endereco::firstOrCreate(
                 ['cep' => (string) $emitente->enderEmit->CEP],
                 [
-                    'endereco' => (string) $emitente->enderEmit->xLgr,
-                    'casa' => (string) $emitente->enderEmit->nro,
-                    'observacao' => (string) ($emitente->enderEmit->xCpl ?? '')
+                    'logradouro' => (string) $emitente->enderEmit->xLgr,
+                    'casa'       => (string) $emitente->enderEmit->nro,
+                    'observacao' => (string) ($emitente->enderEmit->xCpl ?? ''),
+                    'uf'         => (string) $emitente->enderEmit->UF,
+                    'bairro'     => (string) $emitente->enderEmit->xBairro,
+                    'cidade'     => (string) $emitente->enderEmit->xMun,
                 ]
             );
+
 
             $dest = $infNFe->dest;
             $clienteDestinatario = Cliente::firstOrCreate(
                 ['documento' => (string) $dest->CNPJ],
-                ['nome' => (string) $dest->xNome, 'tipo' => 'destinatário']
+                ['nome' => (string) $dest->xNome, 'tipo' => 'destinatário'],
+
             );
 
             $enderecoDestinatario = Endereco::firstOrCreate(
                 ['cep' => (string) $dest->enderDest->CEP],
                 [
-                    'endereco' => (string) $dest->enderDest->xLgr,
-                    'casa' => (string) $dest->enderDest->nro,
-                    'observacao' => (string) ($dest->enderDest->xCpl ?? '')
+                    'logradouro' => (string) $dest->enderDest->xLgr,
+                    'casa'       => (string) $dest->enderDest->nro,
+                    'observacao' => (string) ($dest->enderDest->xCpl ?? ''),
+                    'uf'         => (string) $dest->enderDest->UF,
+                    'bairro'     => (string) $dest->enderDest->xBairro,
+                    'cidade'     => (string) $dest->enderDest->xMun,
                 ]
             );
+
 
             $notaFiscal = NotaFiscal::create([
                 'chave_acesso' => (string) $xml->protNFe->infProt->chNFe,
@@ -87,7 +96,7 @@ class ImportacaoController extends Controller
             ]);
 
 
-            
+
             Frete::create([
                 'id_pedido' => $pedido->id_pedido,
             ]);

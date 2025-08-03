@@ -65,11 +65,11 @@
                         <td>{{ $pedidos->notaFiscal->remetente->nome }}</td>
                         <td>{{ $pedidos->notaFiscal->destinatario->nome }}</td>
                         <td>{{ $pedidos->notaFiscal->destinatario->documento }}</td>
-                        <td></td>
+                        <td>{{ $pedidos->notaFiscal->enderecoRemetente->uf }}</td>
                         <td>R$ {{ $pedidos->frete->valor_frete }}</td>
                         <td class="text-center">
                             <button class="btn btn-sm btn-warning me-1" data-bs-toggle="modal"
-                                data-bs-target="#modalShow{{ $result }}">
+                                data-bs-target="#modalShow{{ $pedidos->id_pedido }}">
                                 <i class="bi bi-eye-fill"></i>
                             </button>
                         </td>

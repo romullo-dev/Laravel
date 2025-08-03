@@ -14,9 +14,12 @@ class Endereco extends Model
 
     protected $fillable = [
         'cep',
-        'endereco',
+        'logradouro',
         'casa',
-        'observacao'
+        'observacao',
+        'uf',
+        'bairro',
+        'cidade'
     ];
 
     public $timestamps = false;
