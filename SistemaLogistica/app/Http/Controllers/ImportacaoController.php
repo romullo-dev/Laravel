@@ -13,23 +13,28 @@ class ImportacaoController extends Controller
         return view('import.index');
     }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'arquivo' => 'required|file|mimes:xml|max:2048',
+   public function store(Request $request)
+{
+    $request->validate([
+        'xml' => 'required|file|mimes:xml', 
+        'pdf' => 'required|file|mimes:pdf',
+    ]);
+
+    try {
+        $xmlFile = $request->file('xml');
+        $pdfFile = $request->file('pdf');
+
+        $xmlPath = $xmlFile->storeAs('temp_importacoes', $xmlFile->getClientOriginalName());
+        $pdfPath = $pdfFile->storeAs('temp_importacoes', $pdfFile->getClientOriginalName());
+
+        Artisan::call('importar:nota-fiscal', [
+            'caminho' => storage_path('app/' . $xmlPath),
         ]);
 
-        try {
-            $arquivo = $request->file('arquivo');
-            $caminho = $arquivo->storeAs('temp_importacoes', $arquivo->getClientOriginalName());
-
-            Artisan::call('importar:nota-fiscal', [
-                'caminho' => storage_path('app/' . $caminho)
-            ]);
-
-            return redirect()->back()->with('success', 'Arquivo XML importado com sucesso!');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Erro ao importar o XML.' . $e);
-        }
+        return redirect()->back()->with('success', 'Arquivo XML importado com sucesso!');
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error', 'Erro ao importar o XML: ' . $e->getMessage());
     }
+}
+
 }

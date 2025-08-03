@@ -31,7 +31,7 @@ class ImportarNotaFiscal extends Command
         try {
             // 👤 Cliente
             $cliente = Cliente::firstOrCreate([
-                'cpf_cnpj' => (string) $xml->NFe->infNFe->dest->CNPJ,
+                'documento' => (string) $xml->NFe->infNFe->dest->CNPJ,
             ], [
                 'nome' => (string) $xml->NFe->infNFe->dest->xNome,
             ]);
@@ -41,7 +41,7 @@ class ImportarNotaFiscal extends Command
                 'cep'        => (string) $xml->NFe->infNFe->dest->enderDest->CEP,
                 'endereco'   => (string) $xml->NFe->infNFe->dest->enderDest->xLgr,
                 'casa'       => (string) $xml->NFe->infNFe->dest->enderDest->nro,
-                'observacao' => (string) $xml->NFe->infNFe->dest->enderDest->xBairro // ou outro campo que caiba
+                'observacao' => (string) $xml->NFe->infNFe->dest->enderDest->xBairro 
             ]);
 
 
@@ -56,7 +56,9 @@ class ImportarNotaFiscal extends Command
                 'quantidade_volumes'  => (int)    $xml->NFe->infNFe->transp->vol->qVol ?? 1,
                 'cliente_destinatario' => $cliente->id,
                 'endereco_destinatario' => $endereco->id,
-                // incluir cliente_remetente e endereco_remetente conforme necessário
+                'cliente_remetente' => $cliente->id,
+                'endereco_remetente' => $endereco->id,
+
             ]);
 
 
