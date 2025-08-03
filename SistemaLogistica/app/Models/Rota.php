@@ -1,9 +1,5 @@
 <?php
 
-/**
- * Created by Reliese Model.
- */
-
 namespace App\Models;
 
 use Carbon\Carbon;
@@ -26,57 +22,65 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $id_origem
  * @property int|null $id_destino
  * 
- * @property Motoristum $motoristum
+ * @property Motorista $motorista
  * @property Veiculo $veiculo
- * @property CentroDistribuicao|null $centro_distribuicao
+ * @property CentroDistribuicao|null $origem
+ * @property CentroDistribuicao|null $destino
  * @property Collection|Historico[] $historicos
  *
  * @package App\Models
  */
 class Rota extends Model
 {
-	protected $table = 'rotas';
-	public $timestamps = false;
+    protected $table = 'rotas';
+    protected $primaryKey = 'id_rotas'; 
+    public $timestamps = false;
+    protected $casts = [
+        'id_veiculo' => 'int',
+        'id_motorista' => 'int',
+        'distancia' => 'float',
+        'previsao' => 'datetime',
+        'data_criacao' => 'datetime',
+        'id_origem' => 'int',
+        'id_destino' => 'int'
+    ];
 
-	protected $casts = [
-		'id_veiculo' => 'int',
-		'id_motorista' => 'int',
-		'distancia' => 'float',
-		'previsao' => 'datetime',
-		'data_criacao' => 'datetime',
-		'id_origem' => 'int',
-		'id_destino' => 'int'
-	];
+    protected $fillable = [
+        'id_motorista',
+        'id_veiculo',
+        'tipo',
+        'distancia',
+        'previsao',
+        'data_rota',
+        'data_criacao',
+        'status',
+        'observacoes',
+        'id_origem',
+        'id_destino'
+    ];
 
-	protected $fillable = [
-		'tipo',
-		'distancia',
-		'previsao',
-		'data_rota',
-		'data_criacao',
-		'status',
-		'observacoes',
-		'id_origem',
-		'id_destino'
-	];
+    public function motorista()
+    {
+        return $this->belongsTo(Motorista::class, 'id_motorista');
+    }
 
-	public function motoristum()
-	{
-		return $this->belongsTo(Motoristum::class, 'id_motorista');
-	}
+    public function veiculo()
+    {
+        return $this->belongsTo(Veiculo::class, 'id_veiculo');
+    }
 
-	public function veiculo()
-	{
-		return $this->belongsTo(Veiculo::class, 'id_veiculo');
-	}
+    public function origem()
+    {
+        return $this->belongsTo(CentroDistribuicao::class, 'id_origem');
+    }
 
-	public function centro_distribuicao()
-	{
-		return $this->belongsTo(CentroDistribuicao::class, 'id_origem');
-	}
+    public function destino()
+    {
+        return $this->belongsTo(CentroDistribuicao::class, 'id_destino');
+    }
 
-	public function historicos()
-	{
-		return $this->hasMany(Historico::class, 'rotas_id_rotas');
-	}
+    public function historicos()
+    {
+        return $this->hasMany(Historico::class, 'rotas_id_rotas');
+    }
 }

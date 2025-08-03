@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8" />
-    <title>Upload XML</title>
-</head>
-    @if(session('success'))
+@extends('layouts.app')
+
+@section('content')
+
+ @if(session('success'))
         <div class="alert alert-success" role="alert">
             {{ session('success') }}
         </div>
@@ -16,9 +14,8 @@
         </div>
     @endif
 
-<body>
     <h1>Rota</h1>
 
     
-</body>
-</html>
+@endsection
+33333

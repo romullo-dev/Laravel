@@ -63,7 +63,7 @@
                                 <i class="bi bi-gear-wide-connected me-1"></i> Operacional
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
-                                <li><a class="dropdown-item" href="{{ route('rotas.index') }}"><i class="bi bi-signpost"></i> Rotas</a></li>
+                                <li><a class="dropdown-item" href="{{ route('rotas.create') }}"><i class="bi bi-signpost"></i> Rotas</a></li>
                                 <li><a class="dropdown-item" href="?rotasAjuste"><i class="bi bi-map-fill"></i> Ajuste
                                         de Rotas</a></li>
                                 <li><a class="dropdown-item" href="{{ route('pedidos.index') }}"><i class="bi bi-box"></i> Pedidos</a></li>

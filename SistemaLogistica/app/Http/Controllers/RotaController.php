@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CentroDistribuicao;
+use App\Models\Historico;
+use App\Models\Motorista;
+use App\Models\Pedido;
 use App\Models\Rota;
+use App\Models\Veiculo;
 use Doctrine\DBAL\Schema\View;
 use Illuminate\Http\Request;
 
@@ -21,15 +26,60 @@ class RotaController extends Controller
      */
     public function create()
     {
-        //
+        $centros = CentroDistribuicao::where('status', 'Ativo')->get();
+        $motoristas = Motorista::with('usuario')->get();
+        $veiculos = Veiculo::where('status_veiculo', 'Ativo')->get();
+
+        $pedido = Pedido::all();
+
+        return View('rotas.create', compact('centros','pedido', 'motoristas', 'veiculos'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+
+        public function store(Request $request)
     {
-        //
+        // Validação básica dos dados recebidos
+        $request->validate([
+            'tipo' => 'required|string',
+            'id_origem' => 'required|integer',
+            'id_destino' => 'required|integer',
+            'distancia' => 'required|numeric',
+            'previsao' => 'required|date',
+            'data_inicio' => 'required|date',
+            'id_motorista' => 'required|integer',
+            'id_veiculo' => 'required|integer',
+            'observacoes' => 'nullable|string',
+            'pedido_id_pedido' => 'nullable|integer',
+        ]);
+
+        // Cria a rota preenchendo os campos
+        $rota = new Rota();
+        $rota->tipo = $request->tipo;
+        $rota->id_origem = $request->id_origem;
+        $rota->id_destino = $request->id_destino;
+        $rota->distancia = $request->distancia;
+        $rota->previsao = $request->previsao;
+        $rota->data_rota = $request->data_inicio;
+        $rota->data_inicio = $request->data_inicio; 
+        $rota->data_criacao = now();
+        $rota->id_motorista = $request->id_motorista;
+        $rota->id_veiculo = $request->id_veiculo;
+        $rota->observacoes = $request->observacoes ?? '';
+
+        $rota->save();
+
+
+        if ($request->filled('pedido_id_pedido')) {
+            Historico::create([
+                'rotas_id_rotas' => $rota->id_rotas,
+                'pedido_id_pedido' => $request->pedido_id_pedido,
+                'data' => $request->data_inicio,
+                'status' => 'Aguardando liberação',
+                'foto' => '',
+            ]);
+        }
+
+        return redirect()->route('rotas.index')->with('success', 'Rota cadastrada com sucesso!');
     }
 
     /**

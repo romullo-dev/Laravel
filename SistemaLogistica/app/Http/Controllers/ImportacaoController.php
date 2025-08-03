@@ -13,7 +13,7 @@ class ImportacaoController extends Controller
 {
     public function index()
     {
-        return view('import.index'); // Sua view com o formulário de upload
+        return view('import.index'); 
     }
 
     public function store(Request $request)
@@ -33,9 +33,8 @@ class ImportacaoController extends Controller
                 return redirect()->route('importacao.index')->with('error', 'Erro: tag <ide> não encontrada no XML.');
             }
 
-            // Converter data do formato ISO 8601 para datetime do MySQL
-            $emissaoBruta = (string) $ide->dhEmi;
-            $emissaoFormatada = date('Y-m-d H:i:s', strtotime($emissaoBruta));
+            $emissao = (string) $ide->dhEmi;
+            $emissaoFormatada = date('Y-m-d H:i:s', strtotime($emissao));
 
             $emitente = $infNFe->emit;
             $clienteEmitente = Cliente::firstOrCreate(

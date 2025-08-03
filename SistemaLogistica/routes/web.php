@@ -64,5 +64,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('rotas')->name('rotas.')->group(function () {
         Route::get('/', [RotaController::class, 'index'])->name('index');
+        Route::get('/criacao', [RotaController::class, 'create'])->name('create');
+        Route::post('/store', [RotaController::class, 'store'])->name('store');
     });
 });
