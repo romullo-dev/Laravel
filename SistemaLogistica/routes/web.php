@@ -5,6 +5,7 @@ use App\Http\Controllers\ImportacaoController;
 use App\Http\Controllers\ModeloController;
 use App\Http\Controllers\MotoristaController;
 use App\Http\Controllers\PedidoController;
+use App\Http\Controllers\RotaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\VeiculoController;
@@ -59,5 +60,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('pedidos')->name('pedidos.')->group(function () {
         Route::get('/', [PedidoController::class, 'index'])->name('index');
+    });
+
+    Route::prefix('rotas')->name('rotas.')->group(function () {
+        Route::get('/', [RotaController::class, 'index'])->name('index');
     });
 });
