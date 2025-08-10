@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CentroController;
 use App\Http\Controllers\ImportacaoController;
 use App\Http\Controllers\ModeloController;
 use App\Http\Controllers\MotoristaController;
@@ -53,6 +54,11 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/store', [VeiculoController::class, 'store'])->name('store');
     });
 
+    Route::prefix('centro')->name('centro.')->group(function () {
+        Route::get('/', [CentroController::class, 'index'])->name('index');
+        Route::post('/store', [CentroController::class, 'store'])->name('store');
+    });
+
     Route::prefix('importacao')->name('importacao.')->group(function () {
         Route::get('/', [ImportacaoController::class, 'index'])->name('index');
         Route::post('/store',  [ImportacaoController::class, 'store'])->name('store');
@@ -66,5 +72,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/', [RotaController::class, 'index'])->name('index');
         Route::get('/criacao', [RotaController::class, 'create'])->name('create');
         Route::post('/store', [RotaController::class, 'store'])->name('store');
+        Route::get('/show/{rotas}', [RotaController::class, 'show'])->name('show');
     });
 });

@@ -18,7 +18,8 @@ class RotaController extends Controller
      */
     public function index()
     {
-        return View('rotas.index');
+        $rota = Rota::with(['motorista.usuario', 'veiculo', 'origem', 'destino', 'historicos'])->get();;
+        return View('rotas.index', compact('rota'));
     }
 
     /**
@@ -32,13 +33,12 @@ class RotaController extends Controller
 
         $pedido = Pedido::all();
 
-        return View('rotas.create', compact('centros','pedido', 'motoristas', 'veiculos'));
+        return View('rotas.create', compact('centros', 'pedido', 'motoristas', 'veiculos'));
     }
 
 
-        public function store(Request $request)
+    public function store(Request $request)
     {
-        // Validação básica dos dados recebidos
         $request->validate([
             'tipo' => 'required|string',
             'id_origem' => 'required|integer',
@@ -52,7 +52,6 @@ class RotaController extends Controller
             'pedido_id_pedido' => 'nullable|integer',
         ]);
 
-        // Cria a rota preenchendo os campos
         $rota = new Rota();
         $rota->tipo = $request->tipo;
         $rota->id_origem = $request->id_origem;
@@ -60,7 +59,7 @@ class RotaController extends Controller
         $rota->distancia = $request->distancia;
         $rota->previsao = $request->previsao;
         $rota->data_rota = $request->data_inicio;
-        $rota->data_inicio = $request->data_inicio; 
+        $rota->data_inicio = $request->data_inicio;
         $rota->data_criacao = now();
         $rota->id_motorista = $request->id_motorista;
         $rota->id_veiculo = $request->id_veiculo;
@@ -85,9 +84,13 @@ class RotaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Rota $rota)
+    public function show(Rota $rotas)
     {
-        //
+        $data = $rotas;
+return view('rotas.show', [
+    'data' => $data,
+    'mapboxToken' => env('MAPBOX_ACCESS_TOKEN')
+]);
     }
 
     /**

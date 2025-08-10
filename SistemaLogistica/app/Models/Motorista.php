@@ -33,6 +33,8 @@ class Motorista extends Model
 		'validade_cnh' => 'datetime',
 		'id_Usuario' => 'int'
 	];
+	protected $primaryKey = 'id_motorista';
+
 
 	protected $fillable = [
 		'cnh',

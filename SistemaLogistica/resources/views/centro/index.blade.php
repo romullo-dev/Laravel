@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
-@section('content')
     {{-- Mensagens de sucesso/erro --}}
     @if (session('success'))
         <div class="alert alert-success" role="alert">
@@ -22,7 +20,7 @@
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h3 class="fw-bold"><i class="bi bi-people-fill me-2"></i> Centro de Distribuição</h3>
             <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalNovoCentro">
-                <i class="bi bi-person-plus-fill me-1"></i> Rotas
+                <i class="bi bi-person-plus-fill me-1"></i> Centro de Distribuição
             </button>
         </div>
 
@@ -59,44 +57,39 @@
             <table class="table table-hover align-middle table-bordered bg-white">
                 <thead class="table-light">
                     <tr>
-                        <th>Data</th>
-                        <th>Motorista</th>
-                        <th>Placa</th>
-                        <th>Tipo de Rota</th>
-                        <th>Origem</th>
-                        <th>Destino</th>
+                        <th>Código</th>
+                        <th>Nome</th>
+                        <th>Cep</th>
+                        <th>Cidade</th>
+                        <th>Estado</th>
                         <th>Status</th>
                         <th class="text-center">Ações</th>
                     </tr>
                 </thead>
-                @foreach ($rota as $rotas)
+                @foreach ($data as $cd)
                     <tbody>
-                        <td>{{ $rotas->data_inicio }}</td>
-                        <td>{{ $rotas->motorista->usuario->nome }}</td>
-                        <td>{{ $rotas->veiculo->placa }}</td>
-                        <td>{{ $rotas->tipo }}</td>
-                        <td>{{ $rotas->origem->uf }}</td>
-                        <td>{{ $rotas->destino->uf }}</td>
-                        <td>
-                            {{ optional($rotas->historicos->last())->status ?? 'Sem histórico' }}
-                        </td>
+                        <td>{{ $cd->id_centro_distribuicao }}</td>
+                        <td>{{ $cd->nome }}</td>
+                        <td>{{ $cd->cep }}</td>
+                        <td>{{ $cd->cidade }}</td>
+                        <td>{{ $cd->uf }}</td>
+                        <td>{{ ucfirst($cd->status) }}</td>
                         <td>
                             <div class="d-flex">
                                 <!-- Botão Visualizar -->
-                                <a href="{{ route('rotas.show', $rotas->id_rotas) }}" class="btn btn-warning btn-sm me-1"
-                                    title="Visualizar">
+                                <button type="button" class="btn btn-warning btn-sm me-1" title="Visualizar"
+                                    data-bs-toggle="modal" data-bs-target="#modalShow{{ $cd->id_centro_distribuicao }}">
                                     <i class="bi bi-eye-fill"></i>
-                                </a>
-
+                                </button>
 
                                 <!-- Botão Editar -->
                                 <button type="button" class="btn btn-primary btn-sm me-1" title="Editar"
-                                    data-bs-toggle="modal" data-bs-target="#modalEdit{{ $rotas->id_rotas }}">
+                                    data-bs-toggle="modal" data-bs-target="#modalEdit{{ $cd->id_centro_distribuicao }}">
                                     <i class="bi bi-pencil-fill"></i>
                                 </button>
 
                                 <!-- Botão Excluir -->
-                                <form action="{{ route('destroy-user', $rotas->id_rotas) }}" method="POST"
+                                <form action="{{ route('destroy-user', $cd->id_centro_distribuicao) }}" method="POST"
                                     onsubmit="return confirm('Tem certeza que deseja excluir este usuário?')">
                                     @csrf
                                     @method('DELETE')
@@ -117,8 +110,7 @@
 
 
 
-
+        @include('centro.modais.novo')
 
     </div>
-
 @endsection

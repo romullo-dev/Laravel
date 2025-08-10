@@ -36,7 +36,10 @@ class CentroDistribuicao extends Model
 		'uf',
 		'latitude',
 		'longitude',
-		'status'
+		'status',
+		'logradouro',
+		'cep',
+		'bairro'
 	];
 
 	public function rotas()

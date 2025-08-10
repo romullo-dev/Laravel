@@ -53,7 +53,7 @@
 
                         <li class="nav-item">
                             <a class="nav-link text-white" href="?rastreio">
-                                <i class="bi bi-truck-front-fill me-1"></i> Rastreio
+                                <i class="bi bi-truck-front-fill me-1"></i> Rastreiamento
                             </a>
                         </li>
 
@@ -63,29 +63,63 @@
                                 <i class="bi bi-gear-wide-connected me-1"></i> Operacional
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
-                                <li><a class="dropdown-item" href="{{ route('rotas.create') }}"><i class="bi bi-signpost"></i> Rotas</a></li>
-                                <li><a class="dropdown-item" href="?rotasAjuste"><i class="bi bi-map-fill"></i> Ajuste
-                                        de Rotas</a></li>
-                                <li><a class="dropdown-item" href="{{ route('pedidos.index') }}"><i class="bi bi-box"></i> Pedidos</a></li>
+                                <li><a class="dropdown-item" href="{{ route('rotas.create') }}">
+                                        <i class="bi bi-signpost"></i> Criação de Rotas</a>
+                                </li>
+                                <li><a class="dropdown-item" href="{{ route('rotas.index') }}">
+                                        <i class="bi bi-map-fill"></i> Rotas </a>
+                                </li>
+                                <li><a class="dropdown-item" href="{{ route('pedidos.index') }}"><i
+                                            class="bi bi-box"></i> Pedidos</a>
+                                </li>
                             </ul>
                         </li>
 
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-white" href="#" id="cadastrosDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle text-white" href="#" id="cadastrosDropdown"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="bi bi-person-plus-fill me-1"></i> Cadastros
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
                                 <li>
-                                    <a class="dropdown-item d-flex align-items-center gap-2" href="{{ route('veiculo.index') }}">
+                                    <a class="dropdown-item d-flex align-items-center gap-2"
+                                        href="{{ route('centro.index') }}">
+                                        <i class="bi bi-truck fs-5 text-primary"></i> Centro de Distribuição
+                                    </a>
+                                </li>
+
+                                <li class="dropdown-divider"></li>
+
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-center gap-2"
+                                        href="{{ route('veiculo.index') }}">
                                         <i class="bi bi-truck fs-5 text-primary"></i> Veículo
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item d-flex align-items-center gap-2" href="{{ route('modelo.index') }}">
+                                    <a class="dropdown-item d-flex align-items-center gap-2"
+                                        href="{{ route('modelo.index') }}">
                                         <i class="bi bi-gear fs-5 text-success"></i> Modelo do Veículo
                                     </a>
-                                    <li class="dropdown-divider"></li>
+                                <li class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="{{ route('motorista.index') }}"><i
+                                            class="bi bi-person-badge"></i> Motorista</a></li>
+                                <li><a class="dropdown-item" href="{{ route('read-user') }}"><i
+                                            class="bi bi-people"></i> Usuários</a></li>
+                            </ul>
+                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-center gap-2"
+                                        href="{{ route('veiculo.index') }}">
+                                        <i class="bi bi-truck fs-5 text-primary"></i> Veículo
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-center gap-2"
+                                        href="{{ route('modelo.index') }}">
+                                        <i class="bi bi-gear fs-5 text-success"></i> Modelo do Veículo
+                                    </a>
+                                <li class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="{{ route('motorista.index') }}"><i
                                             class="bi bi-person-badge"></i> Motorista</a></li>
                                 <li><a class="dropdown-item" href="{{ route('read-user') }}"><i
@@ -121,7 +155,8 @@
                                 </li>
                             </ul>
 
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                style="display: none;">
                                 @csrf
                             </form>
                         </li>

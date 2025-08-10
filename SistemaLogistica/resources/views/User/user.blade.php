@@ -114,16 +114,16 @@
 </div>
 
 <!-- Modal: Novo Usuário -->
-@include('user.modais.novo')
+@include('User.modais.novo')
 
 <!-- Modal: Editar para cada usuário -->
 @foreach ($usuarios as $usuario)
-    @include('user.modais.edit', ['usuario' => $usuario])
+    @include('User.modais.edit', ['usuario' => $usuario])
 @endforeach
 
 <!-- Modal: Visualizar para cada usuário (componente Blade) -->
 @foreach ($usuarios as $usuario)
-    @include('user.modais.show', ['usuario' => $usuario])
+    @include('User.modais.show', ['usuario' => $usuario])
 @endforeach
 
 
