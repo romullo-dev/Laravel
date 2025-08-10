@@ -87,8 +87,16 @@ class Rota extends Model
 
 public function pedidos()
 {
-    return $this->hasMany(Pedido::class, 'rota_id', 'id_rotas');
+    return $this->hasManyThrough(
+        Pedido::class,          
+        Historico::class,      
+        'rotas_id_rotas',     
+        'id_pedido',         
+        'id_rotas',           
+        'pedido_id_pedido'
+    );
 }
+
 
 
 

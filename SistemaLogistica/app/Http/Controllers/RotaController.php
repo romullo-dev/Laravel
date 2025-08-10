@@ -18,7 +18,7 @@ class RotaController extends Controller
      */
     public function index()
     {
-        $rota = Rota::with(['motorista.usuario', 'veiculo', 'origem', 'destino', 'historicos', 'pedidos'])->get();;
+        $rota =  Rota::with(['pedidos', 'motorista.usuario', 'veiculo', 'origem', 'destino', 'historicos'])->get();
         return View('rotas.index', compact('rota'));
     }
 
@@ -89,10 +89,10 @@ class RotaController extends Controller
     public function show(Rota $rotas)
     {
         $data = $rotas;
-return view('rotas.show', [
-    'data' => $data,
-    'mapboxToken' => env('MAPBOX_ACCESS_TOKEN')
-]);
+        return view('rotas.show', [
+            'data' => $data,
+            'mapboxToken' => env('MAPBOX_ACCESS_TOKEN')
+        ]);
     }
 
     /**
