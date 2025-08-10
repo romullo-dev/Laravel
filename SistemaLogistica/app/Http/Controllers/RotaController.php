@@ -18,7 +18,7 @@ class RotaController extends Controller
      */
     public function index()
     {
-        $rota = Rota::with(['motorista.usuario', 'veiculo', 'origem', 'destino', 'historicos'])->get();;
+        $rota = Rota::with(['motorista.usuario', 'veiculo', 'origem', 'destino', 'historicos', 'pedidos'])->get();;
         return View('rotas.index', compact('rota'));
     }
 
@@ -50,6 +50,7 @@ class RotaController extends Controller
             'id_veiculo' => 'required|integer',
             'observacoes' => 'nullable|string',
             'pedido_id_pedido' => 'nullable|integer',
+            'ultimo_status' => 'required|string',
         ]);
 
         $rota = new Rota();
@@ -64,6 +65,7 @@ class RotaController extends Controller
         $rota->id_motorista = $request->id_motorista;
         $rota->id_veiculo = $request->id_veiculo;
         $rota->observacoes = $request->observacoes ?? '';
+        $rota->ultimo_status = $request->ultimo_status ?? '';
 
         $rota->save();
 

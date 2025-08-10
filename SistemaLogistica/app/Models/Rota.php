@@ -56,7 +56,8 @@ class Rota extends Model
         'status',
         'observacoes',
         'id_origem',
-        'id_destino'
+        'id_destino',
+        'ultimo_status'
     ];
 
     public function motorista()
@@ -83,4 +84,12 @@ class Rota extends Model
     {
         return $this->hasMany(Historico::class, 'rotas_id_rotas');
     }
+
+public function pedidos()
+{
+    return $this->hasMany(Pedido::class, 'rota_id', 'id_rotas');
+}
+
+
+
 }

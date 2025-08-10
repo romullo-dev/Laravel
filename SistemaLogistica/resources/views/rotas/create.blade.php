@@ -114,6 +114,9 @@
                             @endforeach
                         </select>
                     </div>
+
+                        <input type="hidden" name="ultimo_status" value="Aguardando liberação">
+
                 
 
                 <!-- Chaves das Notas Fiscais 
@@ -133,5 +136,7 @@
         </div>
     </div>
 </div>
+
+@include('rotas.modais.edit')
 
 @endsection

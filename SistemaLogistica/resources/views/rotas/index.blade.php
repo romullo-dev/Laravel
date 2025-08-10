@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
-@section('content')
     {{-- Mensagens de sucesso/erro --}}
     @if (session('success'))
         <div class="alert alert-success" role="alert">
@@ -71,6 +69,9 @@
                 </thead>
                 @foreach ($rota as $rotas)
                     <tbody>
+
+                        <h1>{{ $rotas->pedidos->id_pedidos }}</h1>
+
                         <td>{{ $rotas->data_inicio }}</td>
                         <td>{{ $rotas->motorista->usuario->nome }}</td>
                         <td>{{ $rotas->veiculo->placa }}</td>
@@ -114,11 +115,12 @@
             </table>
         </div>
         <br>
-
+        @foreach ($rota as $rotas)
+            @include('rotas.modais.edit', ['rotas' => $rotas])
+        @endforeach
 
 
 
 
     </div>
-
 @endsection
