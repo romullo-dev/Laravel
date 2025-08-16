@@ -95,12 +95,14 @@ class RotaController extends Controller
         ]);
     }
 
+
+
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Rota $rota)
-    {
-        //
+    public function edit(Request $request)
+    {   
+        
     }
 
     /**
