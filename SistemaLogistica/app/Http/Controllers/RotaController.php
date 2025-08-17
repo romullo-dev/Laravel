@@ -52,7 +52,6 @@ class RotaController extends Controller
             'id_veiculo' => 'required|integer',
             'observacoes' => 'nullable|string',
             'pedido_id_pedido' => 'nullable|integer',
-            'ultimo_status' => 'required|string',
         ]);
 
         $rota = new Rota();
@@ -67,7 +66,6 @@ class RotaController extends Controller
         $rota->id_motorista = $request->id_motorista;
         $rota->id_veiculo = $request->id_veiculo;
         $rota->observacoes = $request->observacoes ?? '';
-        $rota->ultimo_status = $request->ultimo_status ?? '';
 
         $rota->save();
 
@@ -99,6 +97,7 @@ class RotaController extends Controller
 
 
 
+
     /**
      * Show the form for editing the specified resource.
      */
@@ -110,12 +109,12 @@ class RotaController extends Controller
             $data['data'] = \Carbon\Carbon::parse($data['data'])->format('Y-m-d H:i:s');
 
 
-           if ($request->hasFile('foto')) {
-    $path = $request->file('foto')->store('historicos', 'public');
-    $data['foto'] = $path;
-} else {
-    $data['foto'] = null; // garante que sempre exista a chave
-}
+            if ($request->hasFile('foto')) {
+                $path = $request->file('foto')->store('historicos', 'public');
+                $data['foto'] = $path;
+            } else {
+                $data['foto'] = null;
+            }
 
 
             Historico::create($data);
@@ -128,9 +127,51 @@ class RotaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Rota $rota)
+    public function store_entrega(Request $request)
     {
-        //
+        try {
+            $request->validate([
+                'tipo' => 'required|string',
+                'id_origem' => 'required|integer',
+                'distancia' => 'required|numeric',
+                'previsao' => 'required|date',
+                'data_inicio' => 'required|date',
+                'id_motorista' => 'required|integer',
+                'id_veiculo' => 'required|integer',
+                'observacoes' => 'nullable|string',
+                'pedido_id_pedido' => 'nullable|integer',
+            ]);
+
+            $rota = new Rota();
+            $rota->tipo = $request->tipo;
+            $rota->id_origem = $request->id_origem;
+            $rota->id_destino = $request->id_origem;
+            $rota->distancia = $request->distancia;
+            $rota->previsao = $request->previsao;
+            $rota->data_rota = $request->data_inicio;
+            $rota->data_inicio = $request->data_inicio;
+            $rota->data_criacao = now();
+            $rota->id_motorista = $request->id_motorista;
+            $rota->id_veiculo = $request->id_veiculo;
+            $rota->observacoes = $request->observacoes ?? '';
+
+            $rota->save();
+
+
+            if ($request->filled('pedido_id_pedido')) {
+                Historico::create([
+                    'rotas_id_rotas' => $rota->id_rotas,
+                    'pedido_id_pedido' => $request->pedido_id_pedido,
+                    'data' => $request->data_inicio,
+                    'status' => 'Aguardando liberação',
+                    'foto' => '',
+                ]);
+            }
+
+            return redirect()->route('rotas.index')->with('success', 'Rota cadastrada com sucesso!');
+        } catch (\Exception $e) {
+            return redirect()->route('rotas.index')->with('error', 'Erro ao cadastrar a rota.' . $e);
+        }
     }
 
     /**

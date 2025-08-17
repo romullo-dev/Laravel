@@ -57,8 +57,7 @@ class Rota extends Model
         'observacoes',
         'id_origem',
         'id_destino',
-        'ultimo_status'
-    ];
+        ];
 
     public function motorista()
     {
