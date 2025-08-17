@@ -66,6 +66,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('pedidos')->name('pedidos.')->group(function () {
         Route::get('/', [PedidoController::class, 'index'])->name('index');
+        Route::get('/rastreamento', [PedidoController::class, 'rastreamento'])->name('rastreamento');
+        Route::post('/show', [PedidoController::class, 'show'])->name('show');
     });
 
     Route::prefix('rotas')->name('rotas.')->group(function () {

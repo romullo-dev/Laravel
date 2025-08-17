@@ -53,8 +53,8 @@
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
 
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="?rastreio">
-                                <i class="bi bi-truck-front-fill me-1"></i> Rastreiamento
+                            <a class="nav-link text-white" href="{{ route('pedidos.rastreamento') }}">
+                                <i class="bi bi-truck-front-fill me-1"></i> Rastreamento
                             </a>
                         </li>
 

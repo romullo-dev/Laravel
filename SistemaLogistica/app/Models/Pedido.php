@@ -26,9 +26,12 @@ class Pedido extends Model
         return $this->belongsTo(NotaFiscal::class, 'id_notaFiscal');
     }
 
-   public function frete()
-{
-    return $this->hasOne(Frete::class, 'id_pedido', 'id_pedido');
-}
-
+    public function frete()
+    {
+        return $this->hasOne(Frete::class, 'id_pedido', 'id_pedido');
+    }
+    public function historicos()
+    {
+        return $this->hasMany(Historico::class, 'pedido_id_pedido', 'id_pedido');
+    }
 }
