@@ -1,38 +1,39 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8" />
-    <title>Upload XML</title>
-</head>
-    @if(session('success'))
-        <div class="alert alert-success" role="alert">
-            {{ session('success') }}
+@extends('layouts.app')
+
+@section('content')
+    <div class="d-flex justify-content-center align-items-center" style="min-height: 100vh; background: linear-gradient(135deg, #002b5c, #005f8f); font-family: 'Segoe UI', sans-serif;">
+        <div class="upload-card bg-white rounded-4 shadow p-4" style="max-width: 500px; width: 100%;">
+            <h1 class="text-center mb-4" style="color: #002b5c;">Enviar arquivo XML</h1>
+
+            @if(session('success'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            @if(session('error'))
+                <div class="alert alert-danger" role="alert">
+                    {{ session('error') }}
+                </div>
+            @endif
+
+            <form action="{{ route('importacao.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="mb-3">
+                    <input type="file" class="form-control" name="xml" accept=".xml" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100" style="background-color: #005f8f; border: none;">Enviar</button>
+            </form>
+
+            @if ($errors->any())
+                <div class="alert alert-danger mt-3">
+                    <ul class="mb-0">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
         </div>
-    @endif
-
-    @if(session('error'))
-        <div class="alert alert-danger" role="alert">
-            {{ session('error') }}
-        </div>
-    @endif
-
-<body>
-    <h1>Enviar arquivo XML</h1>
-
-    <form action="{{ route('importacao.store') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        <input type="file" name="xml" accept=".xml" required>
-        <button type="submit">Enviar</button>
-    </form>
-
-    @if ($errors->any())
-        <div style="color:red;">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-</body>
-</html>
+    </div>
+@endsection

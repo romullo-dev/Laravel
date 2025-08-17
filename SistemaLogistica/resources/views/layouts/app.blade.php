@@ -10,10 +10,19 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
 
-
     <style>
+        html, body {
+            height: 100%;
+        }
+
         body {
+            display: flex;
+            flex-direction: column;
             background-color: #f0f4f8;
+        }
+
+        main {
+            flex: 1; /* Faz o main crescer e empurrar o footer para baixo */
         }
 
         .navbar {
@@ -51,8 +60,7 @@
 
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
-
-                        <li class="nav-item">
+                         <li class="nav-item">
                             <a class="nav-link text-white" href="{{ route('pedidos.rastreamento') }}">
                                 <i class="bi bi-truck-front-fill me-1"></i> Rastreamento
                             </a>
@@ -171,7 +179,7 @@
         @yield('content')
     </main>
 
-    <footer class="text-center text-muted">
+    <footer class="text-center text-muted mt-auto">
         <hr>
         <p>DNA Transportes &copy; {{ date('Y') }} - Todos os direitos reservados.</p>
     </footer>
