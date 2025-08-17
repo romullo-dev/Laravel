@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RotaRequest;
 use App\Models\CentroDistribuicao;
 use App\Models\Historico;
 use App\Models\Motorista;
@@ -10,6 +11,7 @@ use App\Models\Rota;
 use App\Models\Veiculo;
 use Doctrine\DBAL\Schema\View;
 use Illuminate\Http\Request;
+
 
 class RotaController extends Controller
 {
@@ -100,9 +102,27 @@ class RotaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Request $request)
-    {   
-        
+    public function historico(RotaRequest $request)
+    {
+
+        try {
+            $data = $request->validated();
+            $data['data'] = \Carbon\Carbon::parse($data['data'])->format('Y-m-d H:i:s');
+
+
+           if ($request->hasFile('foto')) {
+    $path = $request->file('foto')->store('historicos', 'public');
+    $data['foto'] = $path;
+} else {
+    $data['foto'] = null; // garante que sempre exista a chave
+}
+
+
+            Historico::create($data);
+            return redirect()->route('rotas.index')->with('success', 'Rota alterada com sucesso!');
+        } catch (\Exception $e) {
+            return redirect()->route('rotas.index')->with('error', 'Erro ao alterada a rota.' . $e);
+        }
     }
 
     /**

@@ -73,6 +73,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/criacao', [RotaController::class, 'create'])->name('create');
         Route::post('/store', [RotaController::class, 'store'])->name('store');
         Route::get('/show/{rotas}', [RotaController::class, 'show'])->name('show');
-        Route::get('/edit', [RotaController::class, 'edit'])->name('edit');
+        Route::post('/historico', [RotaController::class, 'historico'])->name('historico');
     });
 });

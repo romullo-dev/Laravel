@@ -12,7 +12,7 @@
           <!-- Placa -->
           <div class="col-md-4">
             <label class="form-label" for="placa"><i class="bi bi-car-front-fill me-1"></i>Placa</label>
-            <input type="text" name="placa" id="placa" maxlength="6" class="form-control" required>
+            <input type="text" name="placa" id="placa" maxlength="7" class="form-control" required>
           </div>
 
           <!-- Ano -->

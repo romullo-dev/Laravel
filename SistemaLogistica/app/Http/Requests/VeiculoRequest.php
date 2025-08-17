@@ -23,7 +23,7 @@ class VeiculoRequest extends FormRequest
     {
 
         return [
-            'placa' => 'required|string|max:6|unique:veiculo,placa',
+            'placa' => 'required|string|max:7|unique:veiculo,placa',
             'ano' => 'required|digits:4|integer|min:1900|max:' . date('Y'),
             'cor' => 'required|string|max:100',
             'status_veiculo' => 'required|in:Ativo,Inativo',

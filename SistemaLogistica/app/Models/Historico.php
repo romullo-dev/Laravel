@@ -40,7 +40,8 @@ class Historico extends Model
         'pedido_id_pedido',
         'data',
         'status',
-        'foto'
+        'foto',
+        'observacao'
     ];
 
     public function pedido(): BelongsTo
