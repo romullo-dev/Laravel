@@ -1,15 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-
     {{-- Mensagens de sucesso/erro --}}
-    @if(session('success'))
+    @if (session('success'))
         <div class="alert alert-success" role="alert">
             {{ session('success') }}
         </div>
     @endif
 
-    @if(session('error'))
+    @if (session('error'))
         <div class="alert alert-danger" role="alert">
             {{ session('error') }}
         </div>
@@ -28,7 +27,8 @@
         {{-- Filtros --}}
         <form method="GET" class="row g-2 mb-3">
             <div class="col-md-4">
-                <input type="text" name="busca" class="form-control" placeholder="Buscar por nome ou CPF" value="{{ request('busca') }}">
+                <input type="text" name="busca" class="form-control" placeholder="Buscar por nome ou CPF"
+                    value="{{ request('busca') }}">
             </div>
             <div class="col-md-3">
                 <select name="tipo" class="form-select">
@@ -75,18 +75,22 @@
                                 <td>{{ $usuario->motorista->categoria }}</td>
                                 <td>{{ \Carbon\Carbon::parse($usuario->motorista->validade_cnh)->format('d/m/Y') }}</td>
                                 <td class="text-center">
-                                    <button class="btn btn-sm btn-warning me-1" data-bs-toggle="modal" data-bs-target="#modalShow{{ $usuario->id_usuario }}">
+                                    <button class="btn btn-sm btn-warning me-1" data-bs-toggle="modal"
+                                        data-bs-target="#modalShow{{ $usuario->motorista->id_motorista }}">
                                         <i class="bi bi-eye-fill"></i>
                                     </button>
 
-                                    <button class="btn btn-sm btn-primary me-1" data-bs-toggle="modal" data-bs-target="#modalEdit{{ $usuario->id_usuario }}">
+                                    <button class="btn btn-sm btn-primary me-1" data-bs-toggle="modal"
+                                        data-bs-target="#modalEdit{{ $usuario->motorista->id_motorista }}">
                                         <i class="bi bi-pencil-square"></i>
                                     </button>
 
-                                    <form action="{{ route('destroy-user', $usuario->id_usuario) }}" method="post" style="display:inline">
+                                    <form action="{{ route('destroy-user', $usuario->id_usuario) }}" method="post"
+                                        style="display:inline">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Tem certeza que quer apagar o usuário {{ $usuario->nome }}?')">
+                                        <button type="submit" class="btn btn-sm btn-danger"
+                                            onclick="return confirm('Tem certeza que quer apagar o usuário {{ $usuario->nome }}?')">
                                             <i class="bi bi-trash"></i>
                                         </button>
                                     </form>
@@ -111,5 +115,12 @@
         {{-- Modal para cadastro de motorista --}}
         @include('motorista.modais.novo')
 
+        @foreach ($usuarios as $usuario)
+            @include('motorista.modais.show', ['usuario' => $usuario])
+        @endforeach
+
+        @foreach ($usuarios as $usuario)
+            @include('motorista.modais.edit', ['usuario' => $usuario])
+        @endforeach
     </div>
 @endsection

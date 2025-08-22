@@ -1,6 +1,6 @@
-<div class="modal fade" id="modalEdit{{ $usuario->id_usuario }}" tabindex="-1">
+<div class="modal fade" id="modalEdit{{ $usuario->motorista->id_motorista }}" tabindex="-1">
     <div class="modal-dialog">
-        <form method="POST" action="{{ route('update-user', $usuario->id_usuario) }}" enctype="multipart/form-data"
+        <form method="POST" action="{{ route('motorista.show', $usuario->motorista->id_motorista) }}" enctype="multipart/form-data"
             class="modal-content">
             @csrf
             @method('PUT')
@@ -11,42 +11,49 @@
             <div class="modal-body row g-2">
                 <div class="col-md-12">
                     <label>Nome</label>
-                    <input name="nome" class="form-control" value="{{ $usuario->nome }}" required>
-                </div>
-                <div class="col-md-6">
-                    <label>Usuário</label>
-                    <input name="user" class="form-control" value="{{ $usuario->user }}" disabled>
-                </div>
-                <div class="col-md-6">
-                    <label>Email</label>
-                    <input name="email" type="email" class="form-control" value="{{ $usuario->email }}" required>
+                    <input name="nome" class="form-control" value="{{ $usuario->nome }}" disabled>
                 </div>
                 <div class="col-md-6">
                     <label>CPF</label>
                     <input name="cpf" class="form-control" maxlength="11" value="{{ $usuario->cpf }}" disabled>
                 </div>
+
                 <div class="col-md-6">
-                    <label>Tipo</label>
-                    <select name="tipo_usuario" class="form-select" required>
-                        <option value="admin" {{ $usuario->tipo_usuario === 'admin' ? 'selected' : '' }}>Admin</option>
-                        <option value="operador" {{ $usuario->tipo_usuario === 'operador' ? 'selected' : '' }}>Torre
-                        </option>
-                        <option value="motorista" {{ $usuario->tipo_usuario === 'motorista' ? 'selected' : '' }}>Motorista
-                        </option>
+                    <label>CNH</label>
+                    <input name="cpf" class="form-control" maxlength="11" value="{{ $usuario->motorista->cnh }}" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label>Categoria</label>
+                    <input name="cpf" class="form-control" maxlength="11" value="{{ $usuario->motorista->cnh }}" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="categoria">Categoria</label>
+                    <select name="categoria" class="form-select" required>
+                        <option value="{{ $usuario->motorista->categoria }}">{{ $usuario->motorista->categoria }}</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                        <option value="E">E</option>
+                        <option value="AB">AB</option>
                     </select>
                 </div>
-                <label>Status</label>
-                    <select name="status_funcionario" class="form-select" required>
-                        <option value="Ativo" {{ $usuario->status_funcionario === 'Ativo' ? 'selected' : '' }}>Ativo</option>
-<option value="Inativo" {{ $usuario->status_funcionario === 'Inativo' ? 'selected' : '' }}>Inativo</option>
 
-                    </select>
+                <div class="col-md-12">
+                    <label for="validade_cnh">Validade da CNH</label>
+                    <input 
+                        type="date" 
+                        name="validade_cnh" 
+                        value="{{ old('validade_cnh', $usuario->motorista->validade_cnh ?? '') }}" 
+                        class="form-control" 
+                    >
+                </div>
+                
 
+                
 
-                    <div class="col-md-12">
-                        <label>Foto (opcional)</label>
-                        <input name="foto" type="file" class="form-control">
-                    </div>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>

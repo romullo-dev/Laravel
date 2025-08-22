@@ -42,6 +42,7 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('motorista')->name('motorista.')->group(function () {
         Route::get('/', [MotoristaController::class, 'index'])->name('index');
         Route::post('/store', [MotoristaController::class, 'store'])->name('store');
+        Route::post('/show/{id}', [MotoristaController::class, 'show'])->name('show');
     });
 
     Route::prefix('modelo')->name('modelo.')->group(function () {
