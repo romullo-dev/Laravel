@@ -44,7 +44,7 @@ class UsuarioController extends Controller
     {
         $usuarios = Usuario::orderBy('created_at', 'desc')->paginate(7);
 
-        return view('User.user', compact('usuarios'));
+        return view('user.user', compact('usuarios'));
     }
 
    public function update(Request $request, Usuario $usuario)
