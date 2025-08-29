@@ -84,7 +84,7 @@
 
 {{-- HERO --}}
 <div class="container-fluid d-flex flex-column justify-content-center align-items-center text-center text-white" 
-     style="height: 90vh; min-height: 500px; background: linear-gradient(135deg, #264653, #0e0e0e); position: relative; overflow: hidden;">
+     style="height: 90vh; width: 100%; min-height: 500px; background: linear-gradient(135deg, #264653, #0e0e0e); position: relative; overflow: hidden;">
     
     <!-- Caminhão de fundo -->
     <img src="{{ asset('images/caminhao.png') }}" 
