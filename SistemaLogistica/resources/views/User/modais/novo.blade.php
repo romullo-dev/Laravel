@@ -1,9 +1,9 @@
-<div class="modal fade" id="modalNovoUsuario" tabindex="-1">
-    <div class="modal-dialog">
+<div class="modal fade" id="modalNovoUsuario" tabindex="-1" >
+    <div class="modal-dialog"  >
         <form method="POST" action="{{ route('store-user') }}" enctype="multipart/form-data" class="modal-content">
             @csrf
-            <div class="modal-header">
-                <h5 class="modal-title">Novo Usuário</h5>
+            <div class="modal-header" style="background-color: #101827;">
+                <h5 class="modal-title text-white">Novo Usuário</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body row g-2">
@@ -26,6 +26,10 @@
                 <div class="col-md-6">
                     <label>CPF</label>
                     <input name="cpf" class="form-control" maxlength="11">
+                </div>
+                <div class="col-md-6">
+                    <label>Telefone</label>
+                    <input name="telefone" class="form-control" maxlength="11">
                 </div>
                 <div class="col-md-6">
                     <label>Tipo</label>

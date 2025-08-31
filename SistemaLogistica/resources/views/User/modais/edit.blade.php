@@ -26,27 +26,34 @@
                     <input name="cpf" class="form-control" maxlength="11" value="{{ $usuario->cpf }}" disabled>
                 </div>
                 <div class="col-md-6">
+                    <label>Telefone</label>
+                    <input name="telefone" class="form-control" maxlength="11" value="{{ $usuario->telefone }}">
+                </div>
+                <div class="col-md-6">
                     <label>Tipo</label>
                     <select name="tipo_usuario" class="form-select" required>
                         <option value="admin" {{ $usuario->tipo_usuario === 'admin' ? 'selected' : '' }}>Admin</option>
                         <option value="operador" {{ $usuario->tipo_usuario === 'operador' ? 'selected' : '' }}>Torre
                         </option>
-                        <option value="motorista" {{ $usuario->tipo_usuario === 'motorista' ? 'selected' : '' }}>Motorista
+                        <option value="motorista" {{ $usuario->tipo_usuario === 'motorista' ? 'selected' : '' }}>
+                            Motorista
                         </option>
                     </select>
                 </div>
                 <label>Status</label>
-                    <select name="status_funcionario" class="form-select" required>
-                        <option value="Ativo" {{ $usuario->status_funcionario === 'Ativo' ? 'selected' : '' }}>Ativo</option>
-<option value="Inativo" {{ $usuario->status_funcionario === 'Inativo' ? 'selected' : '' }}>Inativo</option>
+                <select name="status_funcionario" class="form-select" required>
+                    <option value="Ativo" {{ $usuario->status_funcionario === 'Ativo' ? 'selected' : '' }}>Ativo
+                    </option>
+                    <option value="Inativo" {{ $usuario->status_funcionario === 'Inativo' ? 'selected' : '' }}>Inativo
+                    </option>
 
-                    </select>
+                </select>
 
 
-                    <div class="col-md-12">
-                        <label>Foto (opcional)</label>
-                        <input name="foto" type="file" class="form-control">
-                    </div>
+                <div class="col-md-12">
+                    <label>Foto (opcional)</label>
+                    <input name="foto" type="file" class="form-control">
+                </div>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>

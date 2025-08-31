@@ -11,16 +11,18 @@ use Illuminate\Http\Request;
 class MotoristaController extends Controller
 {
     public function index()
-    {
-        $usuarios = Usuario::with('motorista')
-            ->where('tipo_usuario', 'motorista')
-            ->paginate(10);
+{
+    $usuarios = Usuario::with('motorista') // Eager Loading para carregar o motorista
+        ->where('tipo_usuario', 'motorista')
+        ->paginate(10);
 
-        $usuariosSelect = Usuario::where('tipo_usuario', 'motorista')->doesntHave('motorista')->get();
+    $usuariosSelect = Usuario::where('tipo_usuario', 'motorista')
+        ->doesntHave('motorista') // Carregar usuários sem motorista
+        ->get();
 
+    return view('motorista.index', compact('usuarios', 'usuariosSelect'));
+}
 
-        return view('motorista.index', compact('usuarios', 'usuariosSelect'));
-    }
 
 
     public function store(MotoristaRequest $request)
@@ -31,33 +33,26 @@ class MotoristaController extends Controller
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'Erro ao cadastrar motorista.');
         }
-    }
-
-    public function road() {}
-
-
-
-    
+    }    
 
     public function show(string $id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+  
+    public function update(MotoristaRequest $request, Motorista $motorista)
     {
-        //
-    }
+        try
+        { 
+         $data = $request->only(['cnh', 'categoria', 'validade_cnh']);
+         $motorista->update($data);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
+          return redirect()->route('motorista.index')->with('success', 'Usuário atualizado com sucesso!');
+        } catch (\Exception $e) {
+            return redirect()->route('motorista.index')->with('error', 'Erro ao atualizar o usuário: ' . $e->getMessage());
+        }
+
     }
 
     /**

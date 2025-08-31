@@ -11,7 +11,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
 
     <style>
-        html, body {
+        html,
+        body {
             height: 100%;
         }
 
@@ -22,7 +23,8 @@
         }
 
         main {
-            flex: 1; /* Faz o main crescer e empurrar o footer para baixo */
+            flex: 1;
+            /* Faz o main crescer e empurrar o footer para baixo */
         }
 
         .navbar {
@@ -60,7 +62,7 @@
 
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
-                         <li class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link text-white" href="{{ route('pedidos.rastreamento') }}">
                                 <i class="bi bi-truck-front-fill me-1"></i> Rastreamento
                             </a>
@@ -152,11 +154,20 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-light ms-2" href="#" role="button"
                                 data-bs-toggle="dropdown">
-                                <i class="bi bi-person-circle fs-5"></i>
                                 {{ Auth::user()->nome ?? Auth::user()->user }}
+                                @if (Auth::user()->foto)
+                                    <img src="{{ asset('storage/' . Auth::user()->foto) }}" alt="Foto do usuário"
+                                        class="img-fluid rounded-circle" style="width: 50px; height: 50px;">
+                                @else
+                                    <i class="bi bi-person-circle fs-5"></i>
+                                @endif
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
                                 <li>
+                                    <a class="dropdown-item"
+                                        href="{{ route('show.user', ['id' => Auth::user()->id_usuario]) }}">
+                                        <i class="bi bi-box-arrow-right me-2"></i> Ver usuário
+                                    </a>
                                     <a class="dropdown-item" href="#"
                                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         <i class="bi bi-box-arrow-right me-2"></i> Sair

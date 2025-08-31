@@ -23,6 +23,7 @@ class Usuario extends Authenticatable
         'status_funcionario',
         'email',
         'foto',
+        'telefone'
     ];
 
     protected $hidden = [

@@ -39,10 +39,24 @@ Route::middleware(['auth'])->group(function () {
 
     Route::put('user-update/{usuario}', [UsuarioController::class, 'update'])->name('update-user');
 
+    Route::get('/user/show/{id}', [UsuarioController::class, 'show'])->name('show.user');
+
+    Route::get('/user/senha/{id}', [UsuarioController::class, 'senha'])->name('senha.user');
+
+    Route::put('user/updatePassword/{id}', [UsuarioController::class, 'updatePassword'])->name('updatePassword.user');
+
+    Route::get('/user/procurar', [UsuarioController::class, 'procurar'])->name('usuarios.procurar');
+
+
+
+
+
+
     Route::prefix('motorista')->name('motorista.')->group(function () {
         Route::get('/', [MotoristaController::class, 'index'])->name('index');
         Route::post('/store', [MotoristaController::class, 'store'])->name('store');
         Route::post('/show/{id}', [MotoristaController::class, 'show'])->name('show');
+        Route::put('/update/{id}', [MotoristaController::class, 'update'])->name('update');
     });
 
     Route::prefix('modelo')->name('modelo.')->group(function () {
