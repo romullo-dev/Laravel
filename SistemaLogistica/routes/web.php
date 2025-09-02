@@ -13,8 +13,11 @@ use App\Http\Controllers\VeiculoController;
 use App\Models\Pedido;
 
 Route::get('/', function () {
-    return redirect()->route('login');
+    return view('home.home');
 });
+
+
+//return redirect()->route('login');
 
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
