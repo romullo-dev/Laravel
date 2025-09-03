@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="min-vh-100 d-flex align-items-center justify-content-center bg-dark p-4">
-    <div class="card shadow-lg rounded-4 border-0 bg-dark text-light p-5" style="max-width: 850px;">
+<div class="min-vh-100 d-flex align-items-center justify-content-center" style="background-color: #3e4754;">
+    <div class="card shadow-lg rounded-4 border-0 text-light p-5" style="max-width: 850px; background-color: #293241;">
         <!-- Cabeçalho -->
         <div class="text-center mb-5">
             <h1 class="display-5 text-warning fw-bold mb-2">
                 Olá, {{ Auth::user()->nome }}! ✨
             </h1>
-            <p class="lead text-secondary">
+            <p class="lead text-light">
                 Que bom te ver de volta! Aqui está um resumo das suas atividades recentes e atualizações importantes.
             </p>
         </div>
@@ -26,9 +26,10 @@
 
             @foreach($cards as $card)
                 <div class="col-12 col-md-6">
-                    <div class="card border-0 shadow-sm h-100 position-relative overflow-hidden" style="background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(0,0,0,0.2)); transition: transform 0.3s, background 0.3s;">
+                    <div class="card border-0 shadow-sm h-100 position-relative overflow-hidden"
+                         style="background-color: rgba(0, 0, 0, 0.2); transition: transform 0.3s, background 0.3s;">
                         <div class="card-body d-flex align-items-center">
-                            <div class="me-3 fs-2 text-warning animate_animated animate_bounce">
+                            <div class="me-3 fs-2 text-warning">
                                 {{ $card['icon'] }}
                             </div>
                             <div class="text-light fw-medium">

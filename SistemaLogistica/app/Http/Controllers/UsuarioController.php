@@ -114,6 +114,32 @@ class UsuarioController extends Controller
     }
 
 
+    public function inserirFoto (Request $request, Usuario $usuario)
+    {
+        $request->validate([
+        ]);
+
+        try {
+            if ($request->hasFile('foto')) {
+                if ($usuario->foto) {
+                    Storage::disk('public')->delete($usuario->foto);
+                }
+
+                $data['foto'] = $request->file('foto')->store('usuarios', 'public');
+            }
+
+            $usuario->update($data);
+
+            return back()->with('success', 'Foto atualizada com sucesso!');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Erro ao atualizar o usuário: ' . $e->getMessage());
+        }
+    }
+
+
+    
+
+
     public function destroy($id_usuario)
     {
         try {

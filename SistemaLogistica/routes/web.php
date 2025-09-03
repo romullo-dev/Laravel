@@ -50,6 +50,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/user/procurar', [UsuarioController::class, 'procurar'])->name('usuarios.procurar');
 
+    Route::post('/user/inserir{id}', [UsuarioController::class, 'inserirFoto'])->name('usuarios.inserir');
+
+
 
 
 

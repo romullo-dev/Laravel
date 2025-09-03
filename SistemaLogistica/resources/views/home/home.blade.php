@@ -11,7 +11,7 @@
 
   <!-- Menu -->
   <header class="fixed top-0 left-0 w-full flex justify-between items-center px-6 md:px-12 py-4 bg-black/80 backdrop-blur-md shadow-md z-50">
-    <img src="imagem1/logo.jpeg" alt="Logo DNA Transporte" class="h-12 w-auto rounded-md">
+    <img src="{{ asset('images/fotocapa.jpg') }}" alt="Logo DNA Transporte" class="h-12 w-auto rounded-md">
     <h1 class="text-xl md:text-2xl font-bold text-yellow-400 tracking-wide">DNA Transporte & Logística</h1>
     <nav>
       <ul class="flex space-x-6 text-sm md:text-lg">
@@ -31,7 +31,7 @@
 
   <!-- Hero -->
 <section id="home" class="relative h-screen flex items-center justify-center pt-20">
-  <img src="imagem1/logo1.jpeg" alt="Caminhão DNA Transporte" class="absolute inset-0 w-full h-full object-cover opacity-50">
+  <img src="{{ asset('images/fotocapa.jpg') }}" alt="Caminhão DNA Transporte" class="absolute inset-0 w-full h-full object-cover opacity-50">
   <div class="relative z-10 text-center px-6">
     <h2 class="text-4xl md:text-6xl font-extrabold text-yellow-400 drop-shadow-lg animate-pulse">
       Soluções Inteligentes em Transporte e Logística
