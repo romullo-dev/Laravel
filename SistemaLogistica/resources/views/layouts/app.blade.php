@@ -19,8 +19,8 @@
         body {
             display: flex;
             flex-direction: column;
-            background-color: #f4f4f4; /* cor principal do sistema */
-            color: #f1f1f1; /* cor de texto padrão clara */
+            background-color: #101010; /* cor principal do sistema */
+            color: #213d55; /* cor de texto padrão clara */
         }
 
         main {

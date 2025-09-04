@@ -52,12 +52,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/user/inserir{id}', [UsuarioController::class, 'inserirFoto'])->name('usuarios.inserir');
 
-
-
-
-
-
-
     Route::prefix('motorista')->name('motorista.')->group(function () {
         Route::get('/', [MotoristaController::class, 'index'])->name('index');
         Route::post('/store', [MotoristaController::class, 'store'])->name('store');
